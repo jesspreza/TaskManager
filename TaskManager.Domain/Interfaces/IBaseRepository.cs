@@ -14,6 +14,6 @@ namespace TaskManager.Domain.Interfaces
         Task<IEnumerable<TEntity?>> GetManyAsync(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity?> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null);
     }
 }

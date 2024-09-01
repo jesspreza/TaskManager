@@ -8,6 +8,6 @@ namespace TaskManager.Domain.Entities
         [MaxLength(250)]
         public string Name { get; private set; }
 
-        public virtual ICollection<Task> Tasks { get; private set; } = new List<Task>();
+        public virtual ICollection<Task>? Tasks { get; private set; } = new List<Task>();
     }
 }

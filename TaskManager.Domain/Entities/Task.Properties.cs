@@ -12,10 +12,11 @@ namespace TaskManager.Domain.Entities
         public string? Description { get; private set; }
 
         [ForeignKey(nameof(Project))]
+        [Required]
         public Guid ProjectId { get; private set; }
 
         public virtual Project? Project { get; private set; }
 
-        public virtual ICollection<TimeTracker> TimeTrackers { get; private set; } = new List<TimeTracker>();
+        public virtual ICollection<TimeTracker>? TimeTrackers { get; private set; } = new List<TimeTracker>();
     }
 }

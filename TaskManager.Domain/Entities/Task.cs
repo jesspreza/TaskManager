@@ -10,19 +10,21 @@ namespace TaskManager.Domain.Entities
             ValidateProjectId(projectId);
             Name = name;
             Description = description;
+            ProjectId = projectId;
         }
 
-        public void UpdateDomain(string name, string? description)
+        public void UpdateDomain(string name, string? description, Guid projectId)
         {
             NameValidator.ValidateName(name);
             Name = name;
             Description = description;
+            ProjectId = projectId;
             Update();
         }
 
         public static void ValidateProjectId(Guid projectId)
         {
-            DomainExceptionValidation.When(projectId == Guid.Empty, "Project cannot be empty");
+            DomainExceptionValidation.When(projectId == Guid.Empty, "A Project must be associated with the Task");
         }
     }
 }

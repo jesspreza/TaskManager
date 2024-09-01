@@ -1,4 +1,5 @@
-﻿using TaskManager.Domain.Validations;
+﻿using TaskManager.Domain.Interfaces;
+using TaskManager.Domain.Validations;
 
 namespace TaskManager.Domain.Entities
 {
@@ -10,10 +11,11 @@ namespace TaskManager.Domain.Entities
             Name = name;
         }
 
-        public void UpdateName(string name)
+        public void UpdateDomain(string name)
         {
             NameValidator.ValidateName(name);
             Name = name;
+            Update();
         }
     }
 }

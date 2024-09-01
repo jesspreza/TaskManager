@@ -4,6 +4,8 @@ namespace TaskManager.Application.DTOs
 {
     public class UserDto
     {
+        public Guid? Id { get; set; }
+
         [Required]
         [MaxLength(250)]
         [MinLength(3)]
