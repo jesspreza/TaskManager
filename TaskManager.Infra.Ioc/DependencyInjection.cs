@@ -6,6 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager.Infra.Data.Context;
 using TaskManager.Application.Mappings;
+using TaskManager.Domain.Interfaces;
+using TaskManager.Infra.Data.Repositories;
+using TaskManager.Application.Interfaces;
+using TaskManager.Application.Services;
+using TaskManager.Domain.Account;
+using TaskManager.Infra.Data.Security;
+using Microsoft.Extensions.Logging;
 
 namespace TaskManager.Infra.Ioc
 {
@@ -44,8 +51,24 @@ namespace TaskManager.Infra.Ioc
             });
 
             services.AddAuthorization();
-        
+
+            services.AddScoped<IAuthenticate, AuthenticateService>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+            services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITimeTrackerRepository, TimeTrackerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<ICollaboratorService, CollaboratorService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITimeTrackerService, TimeTrackerService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddAutoMapper(typeof(EntityMappingProfile));
+
 
             return services;
 

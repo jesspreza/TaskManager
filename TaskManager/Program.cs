@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TaskManager.Api.Middleware;
 using TaskManager.Infra.Data.Context;
 using TaskManager.Infra.Ioc;
 
@@ -7,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddInfrastructureSwagger();
+//builder.Services.AddSwaggerGen();
+
+builder.Services.AddLogging();
 
 //Infrastructure configuration
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -23,6 +27,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
 

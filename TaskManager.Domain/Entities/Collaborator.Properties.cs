@@ -11,6 +11,6 @@ namespace TaskManager.Domain.Entities
         public Guid UserId { get; private set; }
         public virtual User User { get; private set; }
 
-        public virtual ICollection<TimeTracker> TimeTrackers { get; private set; } = new List<TimeTracker>();
+        public virtual ICollection<TimeTracker>? TimeTrackers { get; private set; } = new List<TimeTracker>();
     }
 }

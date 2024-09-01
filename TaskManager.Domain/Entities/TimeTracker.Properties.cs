@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TaskManager.Domain.Entities
 {
@@ -21,6 +16,7 @@ namespace TaskManager.Domain.Entities
         public string TimeZoneId { get; private set; }
         
         [ForeignKey(nameof(Task))]
+        [Required]
         public Guid TaskId { get; private set; }
         public virtual Task? Task { get; set; }
         

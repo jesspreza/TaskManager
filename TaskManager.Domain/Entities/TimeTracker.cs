@@ -27,8 +27,10 @@ namespace TaskManager.Domain.Entities
 
         public static void ValidateDomain(DateTime startDate, DateTime endDate, Guid taskId, string timeZoneId)
         {
+            DomainExceptionValidation.When(startDate <= DateTime.MinValue, "Start date is required");
+            DomainExceptionValidation.When(endDate <= DateTime.MinValue, "End date is required");
             DomainExceptionValidation.When(startDate > endDate, "Start date cannot be later than end date");
-            DomainExceptionValidation.When(taskId == Guid.Empty, "Task id must be provided");
+            DomainExceptionValidation.When(taskId == Guid.Empty, "A Task must be provided");
             DomainExceptionValidation.When(string.IsNullOrEmpty(timeZoneId), "Time zone must be provided");
         }
     }

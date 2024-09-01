@@ -1,16 +1,18 @@
-﻿using TaskManager.Domain.Validations;
+﻿using TaskManager.Domain.Interfaces;
+using TaskManager.Domain.Validations;
 
 namespace TaskManager.Domain.Entities
 {
     public partial class Collaborator
     {
-        public Collaborator(string name) : base()
+        public Collaborator(string name, Guid userId) : base()
         {
             NameValidator.ValidateName(name);
             Name = name;
+            UserId = userId;
         }
 
-        public void UpdateName(string name)
+        public void UpdateDomain(string name)
         {
             NameValidator.ValidateName(name);
             Name = name;
