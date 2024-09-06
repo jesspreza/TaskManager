@@ -1,7 +1,7 @@
 Instruções para Executar o Projeto
 Para executar este projeto, siga as instruções abaixo:
 
-Instalação do Docker: Certifique-se de ter o Docker instalado em sua máquina. Caso ainda não tenha, você pode baixá-lo aqui.
+Instalação do Docker: Certifique-se de ter o Docker instalado em sua máquina.
 
 Iniciar o Container do SQL Server: Execute o seguinte comando no terminal para iniciar o container do SQL Server:
 
