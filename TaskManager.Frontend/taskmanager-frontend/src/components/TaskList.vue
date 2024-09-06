@@ -373,6 +373,9 @@ export default {
         description: '',
         projectId: null,
       };
+      this.nameState = null,
+      this.descriptionState = null,
+      this.projectState = null,
       this.$refs.taskForm.reset;
     },
     resetTaskToProjectForm() {

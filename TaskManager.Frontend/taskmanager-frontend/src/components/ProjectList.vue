@@ -201,6 +201,7 @@ export default {
     },
     showProjectCreate() {
       this.resetProjectForm();
+      this.nameState = null;
       this.showCreateProject = true;
     },
     showEditProjectModal(project) {
