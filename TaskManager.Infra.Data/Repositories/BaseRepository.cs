@@ -71,7 +71,7 @@ namespace TaskManager.Infra.Data.Repositories
             return new PagedList<TEntity>(items, pageNumber, pageSize, totalCount);
         }
 
-        public async Task<IEnumerable<TEntity?>> GetManyAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<IEnumerable<TEntity?>> GetManyAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();
         }

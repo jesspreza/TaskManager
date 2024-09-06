@@ -1,5 +1,4 @@
-﻿using TaskManager.Domain.Interfaces;
-using TaskManager.Domain.Validations;
+﻿using TaskManager.Domain.Validations;
 
 namespace TaskManager.Domain.Entities
 {

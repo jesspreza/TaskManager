@@ -20,7 +20,7 @@ namespace TaskManager.Application.DTOs
         public Guid TaskId { get; set; }
         public virtual TaskDto? TaskDto { get; set; }
 
-        public Guid? CollaboratorId { get; set; }
+        public Guid CollaboratorId { get; set; }
         public virtual CollaboratorDto? CollaboratorDto { get; set; }
     }
 }

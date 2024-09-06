@@ -9,6 +9,7 @@
         public DateTime? DeletedAt { get; set; }
         public Guid UserId { get; set; }
         public UserResponseDto? UserResponseDto { get; set; }
-        public IEnumerable<TimeTrackerResponseDto>? TimeTrackersResponseDto { get; set; }
+
+        //public ICollection<TimeTrackerResponseDto>? TimeTrackersResponseDto { get; set; }
     }
 }

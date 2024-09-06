@@ -4,7 +4,21 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<DocumentationFile>bin\Debug\net7.0\TaskManager.Api.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\fa-brands-400.60e5c9d3.woff2" />
+    <None Include="wwwroot\fonts\fa-regular-400.6f7d0aec.woff2" />
+    <None Include="wwwroot\fonts\fa-solid-900.cece584e.woff2" />
+    <None Include="wwwroot\js\app.a3bfe738.js" />
+    <None Include="wwwroot\js\app.a3bfe738.js.map" />
+    <None Include="wwwroot\js\app.f6f871bf.js" />
+    <None Include="wwwroot\js\app.f6f871bf.js.map" />
+    <None Include="wwwroot\js\chunk-vendors.f8525217.js" />
+    <None Include="wwwroot\js\chunk-vendors.f8525217.js.map" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
@@ -16,6 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 	

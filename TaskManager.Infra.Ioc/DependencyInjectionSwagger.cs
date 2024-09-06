@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace TaskManager.Infra.Ioc
 {
@@ -31,6 +32,22 @@ namespace TaskManager.Infra.Ioc
                         new string[] {}
                     }
                 });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Task Manager API",
+                    Version = "v1",
+                    Description = "API for managing tasks and time tracking",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Jessica Preza",
+                        Email = "jepfontes@gmail.com",
+                        Url = new Uri("https://www.linkedin.com/in/jessica-preza-45b721130/")
+                    }
+                });
+
+                var xmlFile = "TaskManager.Api.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             return services;

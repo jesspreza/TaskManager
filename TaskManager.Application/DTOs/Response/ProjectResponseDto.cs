@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TaskManager.Application.DTOs.Response
+﻿namespace TaskManager.Application.DTOs.Response
 {
     public class ProjectResponseDto
     {
@@ -10,7 +8,6 @@ namespace TaskManager.Application.DTOs.Response
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        [NotMapped]
-        public IEnumerator<TaskResponseDto>? TasksResponseDto { get; set; }
+        //public ICollection<TaskResponseDto>? TasksResponseDto { get; set; }
     }
 }

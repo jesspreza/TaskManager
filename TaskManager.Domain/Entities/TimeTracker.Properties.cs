@@ -21,7 +21,8 @@ namespace TaskManager.Domain.Entities
         public virtual Task? Task { get; set; }
         
         [ForeignKey(nameof(Collaborator))]
-        public Guid? CollaboratorId { get; private set; }
+        [Required]
+        public Guid CollaboratorId { get; private set; }
         public virtual Collaborator? Collaborator { get; private set; }
     }
 }
