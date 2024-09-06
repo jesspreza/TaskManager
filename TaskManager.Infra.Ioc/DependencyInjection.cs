@@ -12,7 +12,6 @@ using TaskManager.Application.Interfaces;
 using TaskManager.Application.Services;
 using TaskManager.Domain.Account;
 using TaskManager.Infra.Data.Security;
-using Microsoft.Extensions.Logging;
 
 namespace TaskManager.Infra.Ioc
 {
@@ -48,6 +47,15 @@ namespace TaskManager.Infra.Ioc
                         Encoding.UTF8.GetBytes(configuration["TokenConfigurations:Secret"])),
                     ClockSkew = TimeSpan.Zero
                 };
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             });
 
             services.AddAuthorization();

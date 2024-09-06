@@ -7,22 +7,12 @@
         public int PageSize { get; set; }
         public int TotalCount { get; set; }
 
-        public PagedList(IEnumerable<T> items, int pageNumber, int pageSize, int count)
+        public PagedList(IEnumerable<T> items, int totalCount, int pageNumber, int pageSize)
         {
-            CurrentPage = pageNumber;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            PageSize = pageSize;
-            TotalCount = count;
-
-            AddRange(items);
-        }
-
-        public PagedList(IEnumerable<T> items, int currentPage, int totalPages, int pageSize, int totalCount)
-        {
-            CurrentPage = currentPage;
-            TotalPages = totalPages;
-            PageSize = pageSize;
             TotalCount = totalCount;
+            PageSize = pageSize;
+            CurrentPage = pageNumber;
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             AddRange(items);
         }

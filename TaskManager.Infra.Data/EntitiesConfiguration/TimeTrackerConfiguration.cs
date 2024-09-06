@@ -12,6 +12,9 @@ namespace TaskManager.Infra.Data.EntitiesConfiguration
                 .Property(tt => tt.TimeZoneId)
                 .IsRequired()
                 .HasMaxLength(200);
+            builder
+                .Property(tt => tt.CollaboratorId)
+                .IsRequired();
         }
     }
 }

@@ -12,8 +12,6 @@ namespace TaskManager.Application.DTOs.Response
         public DateTime? DeletedAt { get; set; }
         public Guid ProjectId { get; set; }
         public ProjectResponseDto? ProjectResponseDto { get; set; }
-
-        [NotMapped]
-        public IEnumerable<TimeTrackerResponseDto>? TimeTrackersResponseDto { get; set; }
+        public ICollection<TimeTrackerResponseDto>? TimeTrackersResponseDto { get; set; }
     }
 }

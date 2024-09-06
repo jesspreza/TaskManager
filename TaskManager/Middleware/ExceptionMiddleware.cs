@@ -31,6 +31,8 @@ namespace TaskManager.Api.Middleware
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var response = new ErrorDetails();
+            context.Response.ContentType = "application/json";
+
             switch (exception)
             {
                 case DomainExceptionValidation domainEx:
@@ -65,7 +67,6 @@ namespace TaskManager.Api.Middleware
             response.Detailed = exception.Message;
 
             var jsonResponse = JsonSerializer.Serialize(response);
-
             return context.Response.WriteAsync(jsonResponse);
         }
     }

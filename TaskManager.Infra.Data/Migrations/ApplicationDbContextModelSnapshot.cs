@@ -120,7 +120,7 @@ namespace TaskManager.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CollaboratorId")
+                    b.Property<Guid>("CollaboratorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -215,7 +215,8 @@ namespace TaskManager.Infra.Data.Migrations
                     b.HasOne("TaskManager.Domain.Entities.Collaborator", "Collaborator")
                         .WithMany("TimeTrackers")
                         .HasForeignKey("CollaboratorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TaskManager.Domain.Entities.Task", "Task")
                         .WithMany("TimeTrackers")

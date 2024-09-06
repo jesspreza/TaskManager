@@ -18,6 +18,6 @@ namespace TaskManager.Application.DTOs.Request
         [Required(ErrorMessage = "A task must be selected")]
         public Guid TaskId { get; set; }
 
-        public Guid? CollaboratorId { get; set; }
+        public Guid CollaboratorId { get; set; }
     }
 }
