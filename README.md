@@ -4,7 +4,7 @@ Para rodar este projeto, siga as instruções abaixo:
 Certifique-se de ter o Docker instalado em sua máquina. Caso ainda não tenha, você pode baixá-lo aqui.
 Execute o seguinte comando no terminal para iniciar o container do SQL Server:
 
-docker run -it --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123!" -p 1433:1433 -d mcr.microsoft.com/mssql/server
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123!" -p 1433:1433 --name mssql --hostname mssql -d mcr.microsoft.com/mssql/server:2022-latest
 
 Este comando iniciará um container Docker contendo o SQL Server com as configurações necessárias.
 
