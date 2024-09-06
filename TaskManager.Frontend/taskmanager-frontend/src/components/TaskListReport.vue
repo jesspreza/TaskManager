@@ -195,7 +195,8 @@
 </template>
 
 <script>
-import axios from '../axios';
+import taskService from '@/services/taskService';
+import collaboratorService from '@/services/collaboratorService';
 import { BPagination } from 'bootstrap-vue-3';
 
 export default {
@@ -319,23 +320,18 @@ export default {
     },
     async fetchTasks() {
       try {
-        const response = await axios.get('/Task/search', {
-          params: {
-            searchTerm: this.searchTerm,
+        const { tasks, pagination } = await taskService.fetchTasks( {
+          searchTerm: this.searchTerm,
             pageNumber: this.paginationParams.pageNumber,
             pageSize: this.paginationParams.pageSize,
-          }
         });
-        this.tasks = response.data;
-        this.allTasks = response.data;
+        this.tasks = tasks;
+        this.allTasks = tasks;
         this.filterTasks();
-        const paginationHeader = response.headers['pagination'];
-        if (paginationHeader) {
-          const paginationData = JSON.parse(paginationHeader);
-          this.paginationParams.pageNumber = paginationData.currentPage;
-          this.paginationParams.pageSize = paginationData.itemsPerPage;
-          this.totalRows = paginationData.totalItems;
-        }
+        this.paginationParams.pageNumber = pagination.currentPage || this.paginationParams.pageNumber;
+        this.paginationParams.pageSize = pagination.itemsPerPage || this.paginationParams.pageSize;
+        this.totalRows = pagination.totalItems || 0;
+        
       } catch (error) {
         console.error('Error fetching tasks:', error);
         this.errorMessage = 'Erro ao tentar buscar tarefas: ' + error.message;
@@ -398,12 +394,9 @@ export default {
     },
     async fetchCollaborators() {
       try {
-        const response = await axios.get('/collaborator', {
-          params: {
-            searchTerm: this.searchTerm,
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-          }
+        const response = await collaboratorService.fetchCollaborators({
+          pageNumber: this.paginationParams.pageNumber,
+          pageSize: this.paginationParams.pageSize
         });
         this.collaboratorOptions = response.data;
       }

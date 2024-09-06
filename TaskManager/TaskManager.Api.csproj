@@ -12,8 +12,12 @@
     <None Include="wwwroot\fonts\fa-brands-400.60e5c9d3.woff2" />
     <None Include="wwwroot\fonts\fa-regular-400.6f7d0aec.woff2" />
     <None Include="wwwroot\fonts\fa-solid-900.cece584e.woff2" />
+    <None Include="wwwroot\js\app.0154161a.js" />
+    <None Include="wwwroot\js\app.0154161a.js.map" />
     <None Include="wwwroot\js\app.a3bfe738.js" />
     <None Include="wwwroot\js\app.a3bfe738.js.map" />
+    <None Include="wwwroot\js\app.e710d872.js" />
+    <None Include="wwwroot\js\app.e710d872.js.map" />
     <None Include="wwwroot\js\app.f6f871bf.js" />
     <None Include="wwwroot\js\app.f6f871bf.js.map" />
     <None Include="wwwroot\js\chunk-vendors.f8525217.js" />
