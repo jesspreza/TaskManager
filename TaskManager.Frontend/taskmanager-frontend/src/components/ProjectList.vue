@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import axios from '../axios';
+import { projectService } from '@/services/projectService';
 import { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination } from 'bootstrap-vue-3';
 
 export default {
@@ -151,7 +151,7 @@ export default {
     },
     async confirmDelete() {
       try {
-        await axios.delete(`/project/${this.itemToDelete}`);
+        await projectService.deleteProject(this.itemToDelete);
         this.fetchProjects();
       } catch (error) {
         console.error('Error deleting project:', error);
@@ -213,13 +213,13 @@ export default {
     },
     async fetchProjects() {
       try {
-        const response = await axios.get('/Project/search', {
-          params: {
-            searchTerm: this.searchTerm,
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-          }
-        });
+        const response = await projectService.fetchProjects( 
+          
+            this.searchTerm,
+            this.paginationParams.pageNumber,
+            this.paginationParams.pageSize,
+          
+        );
         this.projects = response.data;
         const paginationHeader = response.headers['pagination'];
         if (paginationHeader) {
@@ -251,11 +251,11 @@ export default {
     async handleSave() {
       try {
         if (this.project.id) {
-          await axios.put(`/project/${this.project.id}`, this.project);
+          await projectService.updateProject(this.project.id, this.project);
           this.closeModal();
           this.fetchProjects();
         } else {
-          await axios.post('/project', this.project);
+          await projectService.createProject(this.project);
           this.closeModal();
           this.fetchProjects();
         }

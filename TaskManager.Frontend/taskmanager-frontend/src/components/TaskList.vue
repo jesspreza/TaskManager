@@ -169,7 +169,7 @@
 </template>
 
 <script>
-import axios from '../axios';
+import taskService from '@/services/taskService';
 import { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination, BFormSelect, BFormTextarea } from 'bootstrap-vue-3';
 
 export default {
@@ -242,7 +242,7 @@ export default {
     },
     async confirmDelete() {
       try {
-        await axios.delete(`/task/${this.itemToDelete}`);
+        await taskService.deleteTask(this.itemToDelete);
         this.fetchTasks(); // Refresh the list
       } catch (error) {
         console.error('Error deleting task:', error);
@@ -308,7 +308,7 @@ export default {
     },
     async handleAddTaskToProject() {
       try {
-        await axios.post(`/Project/${this.task.projectId}/Tasks`, { taskId: this.selectedTaskId });
+        await taskService.addTaskToProject(this.task.projectId, this.selectedTaskId);
         this.fetchProjects();
         this.showAddTaskToProjectModal = false;
       } catch (error) {
@@ -317,21 +317,17 @@ export default {
     },
     async fetchTasks() {
       try {
-        const response = await axios.get('/Task/search', {
-          params: {
+        const  { tasks, pagination } = await taskService.fetchTasks({
+          
             searchTerm: this.searchTerm,
             pageNumber: this.paginationParams.pageNumber,
             pageSize: this.paginationParams.pageSize,
-          }
         });
-        this.tasks = response.data;
-        const paginationHeader = response.headers['pagination'];
-        if (paginationHeader) {
-          const paginationData = JSON.parse(paginationHeader);
-          this.paginationParams.pageNumber = paginationData.currentPage;
-          this.paginationParams.pageSize = paginationData.itemsPerPage;
-          this.totalRows = paginationData.totalItems;
-        }
+        this.tasks = tasks;
+        this.paginationParams.pageNumber = pagination.currentPage || this.paginationParams.pageNumber;
+        this.paginationParams.pageSize = pagination.itemsPerPage || this.paginationParams.pageSize;
+        this.totalRows = pagination.totalItems || 0;
+        
       } catch (error) {
         console.error('Error fetching tasks:', error);
         this.errorMessage = 'Erro ao buscar tarefas: ' + error.message;
@@ -340,16 +336,10 @@ export default {
     },
     async fetchProjects() {
       try {
-        const response = await axios.get('/Project', {
-          params: {
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-          }
+        this.projectOptions = await taskService.fetchProjects({
+          pageNumber: this.paginationParams.pageNumber,
+          pageSize: this.paginationParams.pageSize,
         });
-        this.projectOptions = response.data.map(project => ({
-          value: project.id,
-          text: project.name
-        }));
       } catch (error) {
         console.error('Error fetching projects:', error);
       }
@@ -368,15 +358,9 @@ export default {
     },
     async handleSave() {
       try {
-        if (this.task.id) {
-          await axios.put(`/task/${this.task.id}`, this.task);
-          this.closeModal();
-          this.fetchTasks();
-        } else {
-          await axios.post('/task', this.task);
-          this.closeModal();
-          this.fetchTasks();
-        }
+        await taskService.saveTask(this.task);
+        this.closeModal();
+        this.fetchTasks();
       } catch (error) {
         console.error('Error saving task:', error);
         this.errorMessage = 'Erro ao salvar tarefa: ' + error.message;

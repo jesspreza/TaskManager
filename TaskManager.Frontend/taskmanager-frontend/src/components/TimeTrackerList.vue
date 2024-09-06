@@ -104,8 +104,8 @@
 </template>
 
 <script>
-import axios from '../axios';
 import { BButton, BForm, BFormGroup, BFormSelect, BTable, BRow, BCol, BPagination, BModal } from 'bootstrap-vue-3';
+import { fetchTimeTrackers, deleteTimeTracker, saveTimeTracker, fetchTasks, fetchCollaborators } from '../services/timeTrackerService';
 
 export default {
   name: 'TimeTrackerList',
@@ -174,7 +174,7 @@ export default {
     },
     async confirmDelete() {
       try {
-        await axios.delete(`/TimeTracker/${this.itemToDelete.id}`);
+        await deleteTimeTracker(this.itemToDelete.id);
         this.fetchTimeTrackers();
       } catch (error) {
         console.error('Erro ao excluir o rastreador de tempo: ', error);
@@ -222,14 +222,12 @@ export default {
     },
     async fetchTasks() {
       try {
-        const response = await axios.get('/Task/search', {
-          params: {
-            searchTerm: this.searchTerm,
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-          }
+        const tasks = await fetchTasks({
+          searchTerm: this.searchTerm,
+          pageNumber: this.paginationParams.pageNumber,
+          pageSize: this.paginationParams.pageSize,
         });
-        this.taskOptions = [{ value: null, text: 'Selecione uma tarefa' }, ...response.data.map(task => ({
+        this.taskOptions = [{ value: null, text: 'Selecione uma tarefa' }, ...tasks.map(task => ({
           value: task.id,
           text: task.name + ' - ' + task.projectName
         }))];
@@ -241,14 +239,12 @@ export default {
     },
     async fetchCollaborators() {
       try {
-        const response = await axios.get('/Collaborator', {
-          params: {
-            searchTerm: this.searchTerm,
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-          }
+        const collaborators = await fetchCollaborators({
+          searchTerm: this.searchTerm,
+          pageNumber: this.paginationParams.pageNumber,
+          pageSize: this.paginationParams.pageSize,
         });
-        this.collaboratorOptions = [{ value: null, text: 'Selecione um colaborador' }, ...response.data.map(collaborator => ({
+        this.collaboratorOptions = [{ value: null, text: 'Selecione um colaborador' }, ...collaborators.map(collaborator => ({
           value: collaborator.id,
           text: collaborator.name
         }))];
@@ -260,15 +256,13 @@ export default {
     },
     async fetchTimeTrackers() {
       try {
-        const response = await axios.get('/TimeTracker/search', {
-          params: {
-            searchTerm: this.searchTerm,
-            dateFilter: this.dateFilter,
-            pageNumber: this.paginationParams.pageNumber,
-            pageSize: this.paginationParams.pageSize,
-            sortBy: this.sortBy,
-            sortDesc: this.sortDesc
-          }
+        const response = await fetchTimeTrackers({
+          searchTerm: this.searchTerm,
+          dateFilter: this.dateFilter,
+          pageNumber: this.paginationParams.pageNumber,
+          pageSize: this.paginationParams.pageSize,
+          sortBy: this.sortBy,
+          sortDesc: this.sortDesc
         });
         this.timeTrackers = response.data;
         const paginationHeader = response.headers['pagination'];
@@ -359,7 +353,7 @@ export default {
     },
     async saveTimeTracker(timeTracker) {
       try {
-        await axios.post('/TimeTracker', timeTracker);
+        await saveTimeTracker(timeTracker);
         this.fetchTimeTrackers();
         this.resetForm();
       } catch (error) {
