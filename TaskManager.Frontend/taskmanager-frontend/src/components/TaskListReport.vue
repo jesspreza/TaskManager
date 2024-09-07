@@ -431,50 +431,6 @@ export default {
 </script>
 
 <style>
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #afafaf;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f4f4f4;
-}
-
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-  border: 1px solid #afafaf !important;
-}
-
-tbody tr:hover {
-  background-color: #e0e0e0 !important;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #f9f9f9;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #ffffff;
-}
-
-.fa-sort-up,
-.fa-sort-down {
-  font-size: 0.75rem;
-  cursor: pointer;
-  margin-left: 5px;
-}
 
 .text-muted {
   color: #6c757d;
