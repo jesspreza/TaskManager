@@ -117,7 +117,7 @@ namespace TaskManager.Api.Controllers
         /// <summary>
         /// Create a new time tracker.
         /// </summary>
-        /// <param name="TimeTrackerRequestDto">Details of the time tracker to create.</param>
+        /// <param name="requestDto">Details of the time tracker to create.</param>
         /// <returns>The created time tracker.</returns>
         /// <response code="201">Returns the created time tracker.</response>
         /// <response code="400">If the time tracker could not be created due to validation errors.</response>
@@ -147,7 +147,7 @@ namespace TaskManager.Api.Controllers
         /// Update an existing time tracker.
         /// </summary>
         /// <param name="id">ID of the time tracker to update.</param>
-        /// <param name="TimeTrackerRequestDto">Updated details of the time tracker.</param>
+        /// <param name="requestDto">Updated details of the time tracker.</param>
         /// <returns>The updated time tracker.</returns>
         /// <response code="200">Returns the updated time tracker.</response>
         /// <response code="404">If the time tracker with the specified ID is not found.</response>

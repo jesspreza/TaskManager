@@ -116,7 +116,7 @@ namespace TaskManager.Api.Controllers
         /// <summary>
         /// Create a new task.
         /// </summary>
-        /// <param name="TaskRequestDto">Details of the task to create.</param>
+        /// <param name="requestDto">Details of the task to create.</param>
         /// <returns>The created task.</returns>
         /// <response code="201">Returns the created task.</response>
         /// <response code="400">If the task could not be created due to invalid data.</response>

@@ -117,7 +117,7 @@ namespace TaskManager.Api.Controllers
         /// <summary>
         /// Create a new project.
         /// </summary>
-        /// <param name="ProjectRequestDto">Details of the project to create.</param>
+        /// <param name="requestDto">Details of the project to create.</param>
         /// <returns>The created project.</returns>
         /// <response code="201">Returns the created project.</response>
         /// <response code="400">If the project could not be created due to invalid data.</response>
@@ -143,7 +143,7 @@ namespace TaskManager.Api.Controllers
         /// Update an existing project.
         /// </summary>
         /// <param name="id">ID of the project to update.</param>
-        /// <param name="ProjectRequestDto">Updated details of the project.</param>
+        /// <param name="requestDto">Updated details of the project.</param>
         /// <returns>The updated project.</returns>
         /// <response code="200">Returns the updated project.</response>
         /// <response code="404">If the project with the specified ID is not found.</response>

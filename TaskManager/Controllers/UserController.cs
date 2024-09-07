@@ -20,7 +20,7 @@ namespace TaskManager.Api.Controllers
         /// <summary>
         /// Register a new user.
         /// </summary>
-        /// <param name="UserRequestDto">The details of the user to register.</param>
+        /// <param name="requestDto">The details of the user to register.</param>
         /// <returns>A response indicating the result of the registration.</returns>
         /// <response code="200">Returns a success message with user registration details.</response>
         /// <response code="400">If the registration request is invalid or fails.</response>

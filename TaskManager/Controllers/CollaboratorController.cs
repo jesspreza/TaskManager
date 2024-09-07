@@ -84,7 +84,7 @@ namespace TaskManager.Api.Controllers
         /// <summary>
         /// Create a new collaborator.
         /// </summary>
-        /// <param name="CollaboratorRequestDto">Details of the collaborator to create.</param>
+        /// <param name="requestDto">Details of the collaborator to create.</param>
         /// <returns>The created collaborator.</returns>
         /// <response code="201">Returns the created collaborator.</response>
         /// <response code="400">If the collaborator could not be created due to invalid data.</response>
@@ -108,7 +108,7 @@ namespace TaskManager.Api.Controllers
         /// Update an existing collaborator.
         /// </summary>
         /// <param name="id">ID of the collaborator to update.</param>
-        /// <param name="CollaboratorRequestDto">Updated details of the collaborator.</param>
+        /// <param name="requestDto">Updated details of the collaborator.</param>
         /// <returns>The updated collaborator.</returns>
         /// <response code="200">Returns the updated collaborator.</response>
         /// <response code="404">If the collaborator with the specified ID is not found.</response>
