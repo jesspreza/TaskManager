@@ -125,16 +125,4 @@ footer {
   border-radius: 5px;
   font-size: small;
 }
-
-.error-modal .modal-content {
-  z-index: 1050 !important;
-  /* Ajuste conforme necessário */
-}
-
-.error-modal .modal-title {
-  color: #c0392b;
-  font-size: 1.5rem;
-  font-weight: bold;
-  /* Defina a cor desejada para o título do modal */
-}
 </style>

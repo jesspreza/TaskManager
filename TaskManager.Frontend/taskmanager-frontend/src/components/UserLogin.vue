@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+
+    <!-- Modal de Erro -->
+    <modal-error
+      :show="isErrorModalVisible"
+      :errorMessage="errorMessage"
+    />
+
     <div id="login">
       <div id="description">
         <h1>Task Manager</h1>
@@ -21,6 +28,7 @@
 </template>
 
 <script setup>
+import ModalError from "./ModalError.vue";
 import { computed, ref } from "vue";
 import axios from "../axios";
 import router from "@/router";
@@ -28,6 +36,8 @@ import router from "@/router";
 const username = ref("");
 const hidePassword = ref(true);
 const password = ref("");
+const isErrorModalVisible = ref(false);
+const errorMessage = ref("");
 
 const passwordFieldIcon = computed(() => hidePassword.value ? "fa-eye" : "fa-eye-slash");
 const passwordFieldType = computed(() => hidePassword.value ? "password" : "text");
@@ -44,7 +54,8 @@ const doLogin = async () => {
   }
   catch (error) {
     console.error("Erro ao fazer login: ", error);
-    alert("Login falhou. Verifique suas credenciais  " + error.message);
+    errorMessage.value = `Login falhou. Verifique suas credenciais: ${error.message}`;
+    isErrorModalVisible.value = true;
   }
 };
 </script>

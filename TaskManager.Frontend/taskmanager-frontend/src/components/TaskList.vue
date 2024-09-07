@@ -1,16 +1,19 @@
 <template>
   <div>
     <!-- Modal confirmação -->
-    <b-modal class="confirm-delete" v-model="isModalVisible" title="Confirmação" @ok="confirmDelete"
-      @cancel="cancelDelete" ok-title="Sim" cancel-title="Cancelar" ok-variant="danger">
-      <p>Você tem certeza que deseja excluir este item?</p>
-    </b-modal>
+    <modal-confirm
+      :show="isModalVisible"
+      message="Você tem certeza que deseja excluir este item?"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
 
     <!-- Modal de Erro -->
-    <b-modal class="error-modal" v-model="isErrorModalVisible" title="Erro" hide-footer>
-      <p>{{ errorMessage }}</p>
-    </b-modal>
-    
+    <modal-error
+      :show="isErrorModalVisible"
+      :errorMessage="errorMessage"
+    />
+
     <!-- Tabela de Tasks -->
     <div class="d-flex justify-content-end m-2">
       <div class="input-group m-2" style="float: right; width: 30%;">
@@ -169,11 +172,13 @@
 </template>
 
 <script>
+import ModalConfirm from './ModalConfirm.vue';
+import ModalError from './ModalError.vue';
 import taskService from '@/services/taskService';
 import { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination, BFormSelect, BFormTextarea } from 'bootstrap-vue-3';
 
 export default {
-  components: { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination, BFormSelect, BFormTextarea },
+  components: { ModalConfirm, ModalError, BButton, BModal, BForm, BFormGroup, BFormInput, BPagination, BFormSelect, BFormTextarea },
   data() {
     return {
       tasks: [],
@@ -435,24 +440,5 @@ tbody tr:nth-child(even) {
   font-size: 0.75rem;
   cursor: pointer;
   margin-left: 5px;
-}
-
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
-.b-modal .modal-body {
-  color: #dc3545;
-  /* Cor do texto de erro */
-}
-
-.confirm-delete .modal-title {
-  color: #c0392b !important;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 </style>

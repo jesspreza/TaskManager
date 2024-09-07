@@ -1,15 +1,18 @@
 <template>
   <div>
     <!-- Modal confirmação -->
-    <b-modal class="confirm-delete" v-model="isModalVisible" title="Confirmação" @ok="confirmDelete"
-      @cancel="cancelDelete" ok-title="Sim" cancel-title="Cancelar" ok-variant="danger">
-      <p>Você tem certeza que deseja excluir este item?</p>
-    </b-modal>
+    <modal-confirm
+      :show="isModalVisible"
+      message="Você tem certeza que deseja excluir este item?"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
 
     <!-- Modal de Erro -->
-    <b-modal class="error-modal" v-model="isErrorModalVisible" title="Erro" hide-footer>
-      <p>{{ errorMessage }}</p>
-    </b-modal>
+    <modal-error
+      :show="isErrorModalVisible"
+      :errorMessage="errorMessage"
+    />
 
     <!-- Tabela de Projetos -->
     <div class="d-flex justify-content-end m-2">
@@ -101,11 +104,13 @@
 </template>
 
 <script>
+import ModalConfirm from './ModalConfirm.vue';
+import ModalError from './ModalError.vue';
 import { projectService } from '@/services/projectService';
 import { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination } from 'bootstrap-vue-3';
 
 export default {
-  components: { BButton, BModal, BForm, BFormGroup, BFormInput, BPagination },
+  components: { ModalConfirm, ModalError, BButton, BModal, BForm, BFormGroup, BFormInput, BPagination },
   data() {
     return {
       projects: [],
@@ -313,7 +318,6 @@ tbody tr:hover {
 
 tbody tr:nth-child(odd) {
   background-color: #f9f9f9;
-  /* Cor para linhas ímpares */
 }
 
 tbody tr:nth-child(even) {
@@ -325,23 +329,5 @@ tbody tr:nth-child(even) {
   font-size: 0.75rem;
   cursor: pointer;
   margin-left: 5px;
-}
-
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
-.b-modal .modal-body {
-  color: #dc3545;
-}
-
-.confirm-delete .modal-title {
-  color: #c0392b !important;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 </style>

@@ -1,15 +1,18 @@
 <template>
   <div>
     <!-- Modal confirmação -->
-    <b-modal class="confirm-delete" v-model="isModalVisible" title="Confirmação" @ok="confirmDelete"
-      @cancel="cancelDelete" ok-title="Sim" cancel-title="Cancelar" ok-variant="danger">
-      <p>Você tem certeza que deseja excluir este item?</p>
-    </b-modal>
+    <modal-confirm
+      :show="isModalVisible"
+      message="Você tem certeza que deseja excluir este item?"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
 
     <!-- Modal de Erro -->
-    <b-modal class="error-modal" v-model="isErrorModalVisible" title="Erro" hide-footer>
-      <p>{{ errorMessage }}</p>
-    </b-modal>
+    <modal-error
+      :show="isErrorModalVisible"
+      :errorMessage="errorMessage"
+    />
 
     <!-- Formulário para TimeTracker -->
     <h6 class="cabecalho"><b>Inicie uma Tarefa</b></h6>
@@ -104,12 +107,14 @@
 </template>
 
 <script>
-import { BButton, BForm, BFormGroup, BFormSelect, BTable, BRow, BCol, BPagination, BModal } from 'bootstrap-vue-3';
+import ModalConfirm from './ModalConfirm.vue';
+import ModalError from './ModalError.vue';
+import { BButton, BForm, BFormGroup, BFormSelect, BTable, BRow, BCol, BPagination } from 'bootstrap-vue-3';
 import { fetchTimeTrackers, deleteTimeTracker, saveTimeTracker, fetchTasks, fetchCollaborators } from '../services/timeTrackerService';
 
 export default {
   name: 'TimeTrackerList',
-  components: { BButton, BForm, BFormGroup, BFormSelect, BTable, BRow, BCol, BPagination, BModal },
+  components: { ModalConfirm, ModalError, BButton, BForm, BFormGroup, BFormSelect, BTable, BRow, BCol, BPagination},
   data() {
     return {
       paginationParams: {
@@ -469,14 +474,6 @@ export default {
   font-weight: bold;
 }
 
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
-.b-modal .modal-content {
-  border-radius: 8px;
-}
-
 .cabecalho {
   border-radius: 5px;
   border: solid 1px #34495e;
@@ -486,15 +483,6 @@ export default {
   margin: 0;
 }
 
-.b-modal .modal-body {
-  color: #dc3545;
-}
-
-.confirm-delete .modal-title {
-  color: #c0392b !important;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
 .pagination-container {
   display: flex;
   justify-content: flex-end;
